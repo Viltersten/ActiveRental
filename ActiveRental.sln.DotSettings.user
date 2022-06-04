@@ -1,0 +1,10 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=68ba3770_002D6abc_002D45e2_002D9c03_002D69bce760ba53/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Charge01" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::E134FFDE-A9D5-4E52-A022-220C2F493781::net6.0::Api.Test.BillingServiceTest.Charge01&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::E134FFDE-A9D5-4E52-A022-220C2F493781::net6.0::Api.Test.BillingServiceTest.Charge03&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::E134FFDE-A9D5-4E52-A022-220C2F493781::net6.0::Api.Test.BillingServiceTest.Test04&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::E134FFDE-A9D5-4E52-A022-220C2F493781::net6.0::Api.Test.BillingServiceTest.Test03&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=Dtos/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

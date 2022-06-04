@@ -1,0 +1,17 @@
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.Extensions.Options;
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.SqlServer;
+global using Microsoft.EntityFrameworkCore.InMemory;
+global using Api.Models.Dtos;
+global using Api.Models.Infos;
+global using Api.Models.Domain;
+global using Api.Models.Exceptions;
+global using Api.Models.Configs;
+global using Api.Auxiliaries;
+global using Api.Services.Interfaces;
+global using Api.Models.Enums;
+global using System.Text.RegularExpressions;
+global using Api.Auxiliaries.Constants;
+global using Api.Auxiliaries.Extensions;
