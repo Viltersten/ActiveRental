@@ -2,26 +2,35 @@ namespace Api.Services.Implementations;
 
 public class BillingService : IBillingService
 {
-    public BillingService(IOptionsSnapshot<BillingConfig> config, AppDbContext context)
-        => (Config, Context) = (config.Value, context);
+    public BillingService(IRepository repo, IOptionsSnapshot<BillingConfig> config)
+        => (Config, Repo) = (config.Value, repo);
 
     BillingConfig Config { get; }
-    AppDbContext Context { get; }
+    IRepository Repo { get; }
 
-    public async Task<double> CalculateCostAsync(Rental rental)
+    public async Task<double> CalculateCostAsync(Guid id, int mileage, bool finalize)
     {
-        Vehicle? vehicle = await Context.Vehicles.SingleOrDefaultAsync(a => a.Plate == rental.Plate);
-        if (vehicle is null)
-            throw new UnrecognizedVehicleException(rental.Plate);
+        Rental rental = await Repo.GetRentalAsync(id);
+
+        double output = await CalculateCostAsync(rental, mileage, finalize);
+
+        return output;
+    }
+
+    public async Task<double> CalculateCostAsync(Rental rental, int mileage, bool finalize)
+    {
+        Vehicle vehicle = await Repo.GetVehicleByPlateAsync(rental.Plate);
 
         double duration = Math.Ceiling(rental.Duration.TotalDays);
         int distance = rental.Distance ?? 0;
         BillingConfig.Plan plan = Config.Plans[vehicle.Type.ToString()];
-        
-        double output = plan.OtherIncrement
+        double cost = plan.OtherIncrement
           + duration * Config.DailyBaseCost * plan.DailyIncrement
           + distance * Config.RangeBaseCost * plan.RangeIncrement;
 
-        return output;
+        if (finalize)
+            await Repo.UpdateRentalAsync(rental.Id, DateTime.Now, mileage, cost);
+
+        return cost;
     }
 }

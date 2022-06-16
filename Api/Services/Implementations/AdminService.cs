@@ -2,11 +2,11 @@
 
 public class AdminService : IAdminService
 {
-    public AdminService(IBillingService service, AppDbContext context)
-        => (Service, Context) = (service, context);
+    public AdminService(IBillingService service, IRepository repo)
+        => (Service, Repo) = (service, repo);
 
     IBillingService Service { get; }
-    AppDbContext Context { get; }
+    IRepository Repo { get; }
 
     public async Task<PickupInfo> RegisterPickupAsync(PickupDto payload)
     {
@@ -18,8 +18,7 @@ public class AdminService : IAdminService
             // DispacherId = payload.AgentId,
             Mileage = -payload.Mileage
         };
-        await Context.Rentals.AddAsync(rental);
-        await Context.SaveChangesAsync();
+        await Repo.CreateRentalAsync(rental);
 
         PickupInfo output = new() { Id = rental.Id };
 
@@ -28,20 +27,20 @@ public class AdminService : IAdminService
 
     public async Task<ReturnInfo> RegisterReturnAsync(ReturnDto payload)
     {
-        Rental? rental = await Context.Rentals.SingleOrDefaultAsync(a => a.Id == payload.Id);
-        if (rental is null)
-            throw new UnrecognizedRentalException(payload.Id);
-        if (rental is not { ReturnOn: null })
-            throw new DuplicatedReturnException(payload.Id, payload.Occasion);
+        double cost = await Service.CalculateCostAsync(payload.Id, payload.Mileage);
 
-        rental.Mileage += payload.Mileage;
-        rental.ReturnOn = DateTime.Now;
-        rental.Credit = await Service.CalculateCostAsync(rental);
-
-        await Context.SaveChangesAsync();
-
-        ReturnInfo output = new() { Id = rental.Id, Charge = rental.Credit };
+        ReturnInfo output = new() { Id = payload.Id, Charge = cost };
 
         return output;
+    }
+
+    public Task<Rental> GetRentalAsync(Guid id)
+    {
+        return Repo.GetRentalAsync(id);
+    }
+
+    public Task<Rental> GetRentalByPlateAsync(string plate)
+    {
+        return Repo.GetRentalByPlateAsync(plate);
     }
 }

@@ -24,7 +24,7 @@ public class AppDbContext : DbContext
         // entity.Property(a => a.FirstName).HasMaxLength(64).IsRequired();
         // entity.Property(a => a.LastName).HasMaxLength(64).IsRequired();
         // entity.Property(a => a.Label).IsRequired().HasDefaultValue(string.Empty);
-        
+
         // entity.Ignore(a => a.FullName);
         // entity.HasKey(a => new { a.UserId, a.TenantId });
     }

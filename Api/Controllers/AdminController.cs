@@ -11,7 +11,7 @@ public class AdminController : ControllerBase
 
     [HttpPost("pickup")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<PickupInfo>> GetActivityHistoryAsync(PickupDto payload)
+    public async Task<ActionResult<PickupInfo>> PickupAsync(PickupDto payload)
     {
         PickupInfo output = await Service.RegisterPickupAsync(payload);
 
@@ -20,7 +20,7 @@ public class AdminController : ControllerBase
 
     [HttpPost("return")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<ReturnInfo>> GetActivityHistoryAsync(ReturnDto payload)
+    public async Task<ActionResult<ReturnInfo>> ReturnAsync(ReturnDto payload)
     {
         ReturnInfo output = await Service.RegisterReturnAsync(payload);
 

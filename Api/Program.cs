@@ -9,11 +9,11 @@ ConfigurationManager config = builder.Configuration;
 
 services.Configure<BillingConfig>(config.GetSection(BillingConfig.SectionKey));
 
+services.AddDbContext<AppDbContext>(Delegates.ContextOptions(config));
+services.AddTransient<IRepository, Repository>();
+
 services.AddScoped<IAdminService, AdminService>();
 services.AddScoped<IBillingService, BillingService>();
-
-services.AddDbContext<AppDbContext>(Delegates.ContextOptions(config));
-// services.AddDbContext<AppDbContext>(Delegates.ContextOptions(config, true));
 
 services.AddControllers()
     .AddJsonOptions(a => a.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
