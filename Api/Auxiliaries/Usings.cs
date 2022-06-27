@@ -15,3 +15,4 @@ global using Api.Models.Enums;
 global using System.Text.RegularExpressions;
 global using Api.Auxiliaries.Constants;
 global using Api.Auxiliaries.Extensions;
+global using System.Text.Json;

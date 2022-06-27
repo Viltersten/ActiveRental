@@ -22,7 +22,7 @@ public class BillingService : IBillingService
         Vehicle vehicle = await Repo.GetVehicleByPlateAsync(rental.Plate);
 
         double duration = Math.Ceiling(rental.Duration.TotalDays);
-        int distance = rental.Distance ?? 0;
+        int distance = mileage + rental.Mileage;
         BillingConfig.Plan plan = Config.Plans[vehicle.Type.ToString()];
         double cost = plan.OtherIncrement
           + duration * Config.DailyBaseCost * plan.DailyIncrement

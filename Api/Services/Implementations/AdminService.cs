@@ -1,23 +1,19 @@
-﻿namespace Api.Services.Implementations;
+﻿using AutoMapper;
+
+namespace Api.Services.Implementations;
 
 public class AdminService : IAdminService
 {
-    public AdminService(IBillingService service, IRepository repo)
-        => (Service, Repo) = (service, repo);
+    public AdminService(IBillingService service, IMapper mapper, IRepository repo)
+        => (Service, Mapper, Repo) = (service, mapper, repo);
 
     IBillingService Service { get; }
+    IMapper Mapper { get; }
     IRepository Repo { get; }
 
     public async Task<PickupInfo> RegisterPickupAsync(PickupDto payload)
     {
-        Rental rental = new()
-        {
-            Plate = payload.Plate,
-            PickupOn = payload.Occasion,
-            CustomerId = payload.CustomerId,
-            // DispacherId = payload.AgentId,
-            Mileage = -payload.Mileage
-        };
+        Rental rental = Mapper.Map<Rental>(payload);
         await Repo.CreateRentalAsync(rental);
 
         PickupInfo output = new() { Id = rental.Id };

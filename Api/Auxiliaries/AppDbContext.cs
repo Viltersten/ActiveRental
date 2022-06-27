@@ -16,7 +16,7 @@ public class AppDbContext : DbContext
         OnModelCreating(builder.Entity<Rental>());
     }
 
-    private static void OnModelCreating(EntityTypeBuilder<Rental> entity)
+    static void OnModelCreating(EntityTypeBuilder<Rental> entity)
     {
         // entity.HasIndex(a => new { a.Idp, a.ExternalId }).IsUnique();
         // entity.Property(a => a.Idp).HasMaxLength(64).IsRequired();

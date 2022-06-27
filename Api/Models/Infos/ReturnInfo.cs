@@ -2,6 +2,6 @@ namespace Api.Models.Infos;
 
 public class ReturnInfo
 {
-    internal Guid Id { get; set; }
-    internal double Charge { get; set; }
+    public Guid Id { get; set; }
+    public double Charge { get; set; }
 }

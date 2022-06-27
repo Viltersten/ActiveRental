@@ -47,6 +47,11 @@ public class Repository : IRepository
 
     public async Task<Guid> CreateRentalAsync(Rental rental)
     {
+        bool unavailable = await Context.Rentals
+            .AnyAsync(a => a.Plate == rental.Plate && a.ReturnOn == null);
+        if (unavailable)
+            throw new VehicleUnavailableException(rental.Plate);
+
         await Context.Rentals.AddAsync(rental);
         await Context.SaveChangesAsync();
 

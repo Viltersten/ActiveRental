@@ -12,7 +12,6 @@ public class Rental
     public int Mileage { get; set; }
     public double Credit { get; set; }
 
-    public int? Distance => Available ? Mileage : null;
     public TimeSpan Duration => (ReturnOn ?? DateTime.Now) - PickupOn;
     public bool Available => ReturnOn is not null;
 }

@@ -1,13 +1,13 @@
 ﻿namespace Api.Controllers;
 
-// [Authorize(AuthenticationSchemes = "Bearer")]
+//[Authorize(Policy = "agent")]
 [ApiController]
 [Route("[controller]")]
 public class AdminController : ControllerBase
 {
     public AdminController(IAdminService service) => Service = service;
 
-    private IAdminService Service { get; }
+    IAdminService Service { get; }
 
     [HttpPost("pickup")]
     [ProducesResponseType(StatusCodes.Status200OK)]

@@ -6,7 +6,7 @@ public class BillingServiceTest
     {
         IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", false)
+            .AddJsonFile("appsettings.test.json", false)
             .Build();
         BillingConfig config = configuration.GetSection("Billing").Get<BillingConfig>();
         Config = Options.Create(config).Value;

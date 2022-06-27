@@ -10,6 +10,7 @@ ConfigurationManager config = builder.Configuration;
 services.Configure<BillingConfig>(config.GetSection(BillingConfig.SectionKey));
 
 services.AddDbContext<AppDbContext>(Delegates.ContextOptions(config));
+services.AddAutoMapper(typeof(Program));
 services.AddTransient<IRepository, Repository>();
 
 services.AddScoped<IAdminService, AdminService>();
